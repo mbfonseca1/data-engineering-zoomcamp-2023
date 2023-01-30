@@ -222,7 +222,7 @@ Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in 
 SELECT 	COUNT(*)
 FROM 	green_taxi_data
 WHERE 	DATE_TRUNC('day', lpep_pickup_datetime) = '2019-01-15' 
-		AND DATE_TRUNC('day', lpep_dropoff_datetime) = '2019-01-15'
+	AND DATE_TRUNC('day', lpep_dropoff_datetime) = '2019-01-15'
 ```
 
 ## Question 4. Largest trip for each day
@@ -239,7 +239,7 @@ Use the pick up time for your calculations.
 
 ```SQL
 SELECT 		DATE_TRUNC('day', lpep_pickup_datetime) as date,
-			trip_distance
+		trip_distance
 FROM 		green_taxi_data
 ORDER BY 	2 DESC
 LIMIT 		1
@@ -259,10 +259,10 @@ In 2019-01-01 how many trips had 2 and 3 passengers?
 
 ```SQL
 SELECT 		passenger_count, 
-			COUNT(*)
+		COUNT(*)
 FROM 		green_taxi_data
 WHERE 		DATE_TRUNC('day', lpep_pickup_datetime) = '2019-01-01' 
-			AND (passenger_count = 2 OR passenger_count = 3) 
+		AND (passenger_count = 2 OR passenger_count = 3) 
 GROUP BY 	1
 ```
 
@@ -283,14 +283,14 @@ Note: it's not a typo, it's `tip` , not `trip`
 
 ```SQL
 SELECT 		zpu."Zone" as pick_up,
-			zdo."Zone" as drop_off,
-			gt.tip_amount as tip
+		zdo."Zone" as drop_off,
+		gt.tip_amount as tip
 FROM 		zones_data zpu,
-			zones_data zdo,
-			green_taxi_data gt
+		zones_data zdo,
+		green_taxi_data gt
 WHERE 		zpu."LocationID" = gt."PULocationID" 
-			AND zdo."LocationID" = gt."DOLocationID"
-			AND zpu."Zone" = 'Astoria'
+		AND zdo."LocationID" = gt."DOLocationID"
+		AND zpu."Zone" = 'Astoria'
 ORDER BY 	3 DESC
 LIMIT 		1
 ```
